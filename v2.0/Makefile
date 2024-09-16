@@ -7,6 +7,7 @@ CC=		cc			# C compiler name goes here
 
 TIME_FUNC=	-DTIME			# Use time(2) for measurement
 TIME_FUNC=	-DTIMES			# Use times(2) for measurement
+TIME_FUNC=	-DCLOCK_GETTIME		# Use clock_gettime(2) for measurement
 HZ=		60			# Frequency of times(2) clock ticks
 
 STRUCTASSIGN=	-DNOSTRUCTASSIGN	# Compiler cannot assign structs

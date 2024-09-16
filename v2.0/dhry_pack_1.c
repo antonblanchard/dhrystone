@@ -52,6 +52,9 @@ extern  int     times ();
 extern long     time();
                 /* see library function "time"  */
 #endif
+#ifdef CLOCK_GETTIME
+struct timespec Begin_ts, End_ts;
+#endif
 
 #define Too_Small_Time 2
                 /* Measurements should last at least 2 seconds */
@@ -137,6 +140,9 @@ main ()
 #ifdef TIME
   Begin_Time = time ( (long *) 0);
 #endif
+#ifdef CLOCK_GETTIME
+  clock_gettime(CLOCK_MONOTONIC, &Begin_ts);
+#endif
 
   for (Run_Index = 1; Run_Index <= Number_Of_Runs; ++Run_Index)
   {
@@ -195,6 +201,9 @@ main ()
 #ifdef TIME
   End_Time = time ( (long *) 0);
 #endif
+#ifdef CLOCK_GETTIME
+  clock_gettime(CLOCK_MONOTONIC, &End_ts);
+#endif
 
   printf ("Execution ends\n");
   printf ("\n");
@@ -249,6 +258,7 @@ main ()
   printf ("        should be:   DHRYSTONE PROGRAM, 2'ND STRING\n");
   printf ("\n");
 
+#ifndef CLOCK_GETTIME
   User_Time = End_Time - Begin_Time;
 
   if (User_Time < Too_Small_Time)
@@ -258,11 +268,17 @@ main ()
     printf ("\n");
   }
   else
+#endif
   {
 #ifdef TIME
     Microseconds = (float) User_Time * Mic_secs_Per_Second 
                         / (float) Number_Of_Runs;
     Dhrystones_Per_Second = (float) Number_Of_Runs / (float) User_Time;
+#elif CLOCK_GETTIME
+    unsigned long ns = (End_ts.tv_sec - Begin_ts.tv_sec) * 1000000000 +
+	    (End_ts.tv_nsec - Begin_ts.tv_nsec);
+    Microseconds = ns / 1000.0 / (float) Number_Of_Runs;
+    Dhrystones_Per_Second = (float) Number_Of_Runs / (float) (ns / 1000000000.0);
 #else
     Microseconds = (float) User_Time * Mic_secs_Per_Second 
                         / ((float) HZ * ((float) Number_Of_Runs));
@@ -270,7 +286,7 @@ main ()
                         / (float) User_Time;
 #endif
     printf ("Microseconds for one run through Dhrystone: ");
-    printf ("%6.1f \n", Microseconds);
+    printf ("%6.3f \n", Microseconds);
     printf ("Dhrystones per Second:                      ");
     printf ("%6.1f \n", Dhrystones_Per_Second);
     printf ("\n");

@@ -342,7 +342,9 @@
 
 #ifndef TIME
 #ifndef TIMES
+#ifndef CLOCK_GETTIME
 #define TIMES
+#endif
 #endif
 #endif
                 /* Use "times" function for measurement */
@@ -352,6 +354,10 @@
 #endif
                 /* Use HZ = 60 for "times" function     */
                 /* unless explicitly defined otherwise  */
+
+#ifdef CLOCK_GETTIME
+#include <time.h>
+#endif
 
 #ifdef TIMES
 #include <sys/types.h>
