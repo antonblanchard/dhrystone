@@ -30,7 +30,6 @@ char            Ch_1_Glob,
 int             Arr_1_Glob [50];
 int             Arr_2_Glob [50] [50];
 
-Enumeration     Func_1 ();
   /* forward declaration necessary since Enumeration may not simply be int */
 
 #ifndef REG
@@ -68,8 +67,20 @@ float           Microseconds,
 
 /* end of variables for time measurement */
 
+void Proc_1 (REG Rec_Pointer Ptr_Val_Par);
+void Proc_2 (One_Fifty   *Int_Par_Ref);
+void Proc_3 (Rec_Pointer *Ptr_Ref_Par);
+void Proc_4 (void);
+void Proc_5 (void);
+void Proc_6 (Enumeration  Enum_Val_Par, Enumeration *Enum_Ref_Par);
+void Proc_7 (One_Fifty Int_1_Par_Val, One_Fifty Int_2_Par_Val, One_Fifty *Int_Par_Ref);
+void Proc_8 (Arr_1_Dim Arr_1_Par_Ref, Arr_2_Dim Arr_2_Par_Ref, int Int_1_Par_Val, int Int_2_Par_Val);
 
-main ()
+Enumeration Func_1 (Capital_Letter Ch_1_Par_Val, Capital_Letter Ch_2_Par_Val);
+Boolean Func_2 (Str_30 Str_1_Par_Ref, Str_30 Str_2_Par_Ref);
+Boolean Func_3 (Enumeration Enum_Par_Val);
+
+int main (void)
 /*****/
 
   /* main program, corresponds to procedures        */
@@ -296,10 +307,8 @@ main ()
 }
 
 
-Proc_1 (Ptr_Val_Par)
+void Proc_1 (REG Rec_Pointer Ptr_Val_Par)
 /**********************/
-
-REG Rec_Pointer Ptr_Val_Par;
     /* executed once */
 {
   REG Rec_Pointer Next_Record = Ptr_Val_Par->Ptr_Comp;  
@@ -330,12 +339,10 @@ REG Rec_Pointer Ptr_Val_Par;
 } /* Proc_1 */
 
 
-Proc_2 (Int_Par_Ref)
+void Proc_2 (One_Fifty   *Int_Par_Ref)
 /******************/
     /* executed once */
     /* *Int_Par_Ref == 1, becomes 4 */
-
-One_Fifty   *Int_Par_Ref;
 {
   One_Fifty  Int_Loc;  
   Enumeration   Enum_Loc;
@@ -353,12 +360,10 @@ One_Fifty   *Int_Par_Ref;
 } /* Proc_2 */
 
 
-Proc_3 (Ptr_Ref_Par)
+void Proc_3 (Rec_Pointer *Ptr_Ref_Par)
 /**********************/
     /* executed once */
     /* Ptr_Ref_Par becomes Ptr_Glob */
-
-Rec_Pointer *Ptr_Ref_Par;
 
 {
   if (Ptr_Glob != Null)
@@ -371,7 +376,7 @@ Rec_Pointer *Ptr_Ref_Par;
 
 
 
-Proc_4 () /* without parameters */
+void Proc_4 (void) /* without parameters */
 /*******/
     /* executed once */
 {
@@ -383,7 +388,7 @@ Proc_4 () /* without parameters */
 } /* Proc_4 */
 
 
-Proc_5 () /* without parameters */
+void Proc_5 (void) /* without parameters */
 /*******/
     /* executed once */
 {
