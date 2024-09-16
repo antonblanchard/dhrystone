@@ -20,7 +20,7 @@ OPTIMIZE=	-O			# Optimization Level
 
 LFLAGS=					#Loader Flags
 
-CFLAGS=	$(OPTIMIZE) $(TIME_FUNC) -DHZ=$(HZ) $(ENUMS) $(STRUCTASSIGN) $(CFL)
+CFLAGS=	$(OPTIMIZE) $(TIME_FUNC) -DHZ=$(HZ) $(ENUMS) $(STRUCTASSIGN) $(CFL) $(XCFLAGS)
 
 #
 #		You shouldn't need to touch the rest
