@@ -15,6 +15,8 @@
  ****************************************************************************
  */
 
+#include <string.h>
+#include <stdlib.h>
 #include "dhry_global.h"
 
 /* Global Variables: */
@@ -28,7 +30,6 @@ char            Ch_1_Glob,
 int             Arr_1_Glob [50];
 int             Arr_2_Glob [50] [50];
 
-extern char     *malloc ();
 Enumeration     Func_1 ();
   /* forward declaration necessary since Enumeration may not simply be int */
 
